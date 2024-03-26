@@ -1,9 +1,10 @@
 import {
   AccountCircle,
   AddCircle,
-  GroupAdd,
+  Groups,
   Nightlight,
-  PersonAdd,
+  PersonAddAlt,
+  Search,
 } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 
@@ -21,11 +22,11 @@ const Sidebar = () => {
 
         <div>
           <IconButton>
-            <PersonAdd></PersonAdd>
+            <PersonAddAlt></PersonAddAlt>
           </IconButton>
 
           <IconButton>
-            <GroupAdd></GroupAdd>
+            <Groups></Groups>
           </IconButton>
 
           <IconButton>
@@ -40,7 +41,17 @@ const Sidebar = () => {
 
       {/* Sidebar Search */}
 
-      <div></div>
+      <div className="bg-white rounded-3xl px-3 py-3 m-3 flex items-center">
+        <IconButton>
+          <Search></Search>
+        </IconButton>
+
+        <input
+          type="text"
+          placeholder="Search"
+          className="outline-0 border-none text-xl ml-3 w-full"
+        />
+      </div>
       {/* Sidebar Conversation */}
 
       <div></div>
