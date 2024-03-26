@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   AccountCircle,
   AddCircle,
@@ -7,10 +8,34 @@ import {
   Search,
 } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
+import ConversationItem from "./ConversationItem";
+import { useState } from "react";
 
 const Sidebar = () => {
+
+    const [conversations,setConversation] = useState([
+        {
+            _id:1,
+            name: "Test01",
+            lastMassage: "Last01",
+            timeStamp:'Today'
+        },
+        {
+            _id:2,
+            name: "Test02",
+            lastMassage: "Last02",
+            timeStamp:'Today'
+        },
+        {
+            _id:3,
+            name: "Ahammad",
+            lastMassage: "Last03",
+            timeStamp:'Today'
+        }
+    ])
+// console.log(conversations)
   return (
-    <div className="flex-[0.3]">
+    <div className="flex-[0.3] flex flex-col">
       {/* Sidebar Header */}
 
       <div className="bg-white rounded-3xl px-1 py-3 m-3 flex justify-between">
@@ -41,7 +66,7 @@ const Sidebar = () => {
 
       {/* Sidebar Search */}
 
-      <div className="bg-white rounded-3xl px-3 py-3 m-3 flex items-center">
+      <div className="bg-white rounded-3xl px-3 py-3 mx-3 flex items-center">
         <IconButton>
           <Search></Search>
         </IconButton>
@@ -54,7 +79,15 @@ const Sidebar = () => {
       </div>
       {/* Sidebar Conversation */}
 
-      <div></div>
+      <div className="bg-white rounded-3xl px-3 py-3 m-3 flex-1">
+        {
+            conversations.map((conversation) => {
+
+                return <ConversationItem key={conversation._id} conversation={conversation}></ConversationItem>
+
+            })
+        }
+      </div>
     </div>
   );
 };
