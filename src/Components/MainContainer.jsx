@@ -3,6 +3,7 @@ import { useState } from "react";
 import ChatArea from "./ChatArea";
 import Sidebar from "./Sidebar";
 import Welcome from "./Welcome";
+import CreateGroup from './CreateGroup';
 
 const MainContainer = () => {
   const [conversations, setConversation] = useState([
@@ -28,7 +29,8 @@ const MainContainer = () => {
   return (
     <div className="bg-[#f4f5f8] h-[90vh] w-[90vw] flex rounded-3xl">
       <Sidebar></Sidebar>
-      <Welcome></Welcome>
+      {/* <Welcome></Welcome> */}
+      <CreateGroup></CreateGroup>
       {/* <ChatArea conversation={conversations[0]}></ChatArea> */}
     </div>
   );
