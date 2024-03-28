@@ -3,6 +3,8 @@
 
 import { Delete, Send } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
+import MessageSelf from "./MessageSelf";
+import MessageOthers from "./MessageOthers";
 
 const ChatArea = ({ conversation }) => {
   // const { name, timeStamp } = conversation;
@@ -24,8 +26,24 @@ const ChatArea = ({ conversation }) => {
           {name[0]}
         </p>
         <div className="flex flex-col justify-center flex-1">
-          <p>{name}</p>
-          <p>{timeStamp}</p>
+          <p
+            style={{
+              gridArea: "1/2/2/4",
+              fontWeight: "bold",
+              color: "rgba(0,0,0,0.54)",
+            }}
+          >
+            {name}
+          </p>
+          <p
+            style={{
+              justifySelf: "flex-end",
+              fontSize: "0.75rem",
+              color: "rgba(0,0,0,0.54)",
+            }}
+          >
+            {timeStamp}
+          </p>
         </div>
         <IconButton>
           <Delete></Delete>
@@ -33,11 +51,27 @@ const ChatArea = ({ conversation }) => {
       </div>
 
       {/* Chat area  */}
-      <div className="flex-1 bg-white p-3 mx-3 rounded-3xl"> Message</div>
+      <div
+        className="flex-1 bg-white p-3 mx-3 rounded-3xl overflow-scroll"
+        style={{
+          scrollbarWidth: "none",
+          /* WebKit */
+          "::-webkit-scrollbar": {
+            display: "none",
+          },
+        }}
+      >
+        <MessageOthers></MessageOthers>
+        <MessageSelf></MessageSelf>
+      </div>
 
       {/* Chat area Text input */}
       <div className="bg-white p-3 m-3 rounded-3xl flex justify-between">
-        <input type="text" placeholder="Type a message" className="outline-0 border-none text-xl ml-3 w-full" />
+        <input
+          type="text"
+          placeholder="Type a message"
+          className="outline-0 border-none text-xl ml-3 w-full"
+        />
         <IconButton>
           <Send></Send>
         </IconButton>

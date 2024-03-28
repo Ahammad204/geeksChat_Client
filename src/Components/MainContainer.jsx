@@ -1,5 +1,6 @@
+import ChatArea from "./ChatArea";
 import Sidebar from "./Sidebar";
-import ChatArea from "./WorkArea";
+
 
 
 
