@@ -4,12 +4,13 @@
 import { Delete, Send } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import MessageSelf from "./MessageSelf";
-import MessageOthers from "./MessageOthers";
+import ChatOthers from "./ChatOthers";
+
+
 
 const ChatArea = ({ conversation }) => {
-  // const { name, timeStamp } = conversation;
-  const name = "Ahammad";
-  const timeStamp = "Today";
+  const { name, timeStamp } = conversation;
+
 
   return (
     <div className="flex-[0.7] flex flex-col">
@@ -61,7 +62,7 @@ const ChatArea = ({ conversation }) => {
           },
         }}
       >
-        <MessageOthers></MessageOthers>
+       <ChatOthers></ChatOthers>
         <MessageSelf></MessageSelf>
       </div>
 
