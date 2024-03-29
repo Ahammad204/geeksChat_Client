@@ -30,8 +30,8 @@ const MainContainer = () => {
     <div className="bg-[#f4f5f8] h-[90vh] w-[90vw] flex rounded-3xl">
       <Sidebar></Sidebar>
       {/* <Welcome></Welcome> */}
-      <CreateGroup></CreateGroup>
-      {/* <ChatArea conversation={conversations[0]}></ChatArea> */}
+      {/* <CreateGroup></CreateGroup> */}
+      <ChatArea conversation={conversations[0]}></ChatArea>
     </div>
   );
 };

@@ -12,33 +12,38 @@ import ConversationItem from "./ConversationItem";
 import { useState } from "react";
 
 const Sidebar = () => {
-
-    const [conversations,setConversation] = useState([
-        {
-            _id:1,
-            name: "Test01",
-            lastMassage: "Last01",
-            timeStamp:'Today'
-        },
-        {
-            _id:2,
-            name: "Test02",
-            lastMassage: "Last02",
-            timeStamp:'Today'
-        },
-        {
-            _id:3,
-            name: "Ahammad",
-            lastMassage: "Last03",
-            timeStamp:'Today'
-        }
-    ])
-// console.log(conversations)
+  const [conversations, setConversation] = useState([
+    {
+      _id: 1,
+      name: "Test01",
+      lastMassage: "Last01",
+      timeStamp: "Today",
+    },
+    {
+      _id: 2,
+      name: "Test02",
+      lastMassage: "Last02",
+      timeStamp: "Today",
+    },
+    {
+      _id: 3,
+      name: "Ahammad",
+      lastMassage: "Last03",
+      timeStamp: "Today",
+    },
+  ]);
+  // console.log(conversations)
   return (
     <div className="flex-[0.3] flex flex-col">
       {/* Sidebar Header */}
 
-      <div className="bg-white rounded-3xl px-1 py-3 m-3 flex justify-between">
+      <div
+        className="bg-white rounded-3xl px-1 py-3 m-3 flex justify-between"
+        style={{
+          boxShadow:
+            "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
+        }}
+      >
         <div>
           <IconButton>
             <AccountCircle></AccountCircle>
@@ -66,7 +71,11 @@ const Sidebar = () => {
 
       {/* Sidebar Search */}
 
-      <div className="bg-white rounded-3xl px-3 py-3 mx-3 flex items-center">
+      <div className="bg-white rounded-3xl px-3 py-3 mx-3 flex items-center"
+          style={{
+            boxShadow:
+              "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
+          }}>
         <IconButton>
           <Search></Search>
         </IconButton>
@@ -79,14 +88,19 @@ const Sidebar = () => {
       </div>
       {/* Sidebar Conversation */}
 
-      <div className="bg-white rounded-3xl px-3 py-3 m-3 flex-1">
-        {
-            conversations.map((conversation) => {
-
-                return <ConversationItem key={conversation._id} conversation={conversation}></ConversationItem>
-
-            })
-        }
+      <div className="bg-white rounded-3xl px-3 py-3 m-3 flex-1"
+          style={{
+            boxShadow:
+              "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
+          }}>
+        {conversations.map((conversation) => {
+          return (
+            <ConversationItem
+              key={conversation._id}
+              conversation={conversation}
+            ></ConversationItem>
+          );
+        })}
       </div>
     </div>
   );
