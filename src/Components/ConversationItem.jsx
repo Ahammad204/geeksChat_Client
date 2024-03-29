@@ -1,15 +1,20 @@
 /* eslint-disable react/prop-types */
 
-const ConversationItem = ({ conversation }) => {
-  const { name, lastMassage, timeStamp } = conversation;
-  //   console.log(conversation);
+import { useNavigate } from "react-router-dom";
 
+const ConversationItem = ({ conversation }) => {
+  const { _id,name, lastMassage, timeStamp } = conversation;
+  //   console.log(conversation);
+  const navigate = useNavigate();
   return (
     <div
-      className="grid  gap-x-3 p-1 m-1 rounded-3xl"
+      className="grid gap-x-3 m-1 p-3 rounded-xl box-border hover:bg-[#d9d9d9] active:bg-white"
       style={{
         gridTemplateColumns: "32px auto auto",
         gridTemplateRows: "auto auto",
+      }}
+      onClick={() => {
+        navigate(`/app/chat/${_id}`);
       }}
     >
       <p
@@ -34,8 +39,8 @@ const ConversationItem = ({ conversation }) => {
       <p className="text-xs">{lastMassage}</p>
       <p
         style={{
-          justifySelf:"flex-end",
-          fontSize:"0.75rem",
+          justifySelf: "flex-end",
+          fontSize: "0.75rem",
           color: "rgba(0,0,0,0.54)",
         }}
       >

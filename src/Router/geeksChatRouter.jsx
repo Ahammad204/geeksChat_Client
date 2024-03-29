@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
           element:<Welcome></Welcome>
         },
         {
-          path:'/app/chat',
+          path:'/app/chat/:id',
           element:<ChatArea></ChatArea>
         },
         {

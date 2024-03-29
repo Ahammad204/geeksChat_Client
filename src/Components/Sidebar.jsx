@@ -10,6 +10,7 @@ import {
 import { IconButton } from "@mui/material";
 import ConversationItem from "./ConversationItem";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const [conversations, setConversation] = useState([
@@ -33,6 +34,9 @@ const Sidebar = () => {
     },
   ]);
   // console.log(conversations)
+
+  const navigate = useNavigate();
+
   return (
     <div className="flex-[0.3] flex flex-col">
       {/* Sidebar Header */}
@@ -51,15 +55,27 @@ const Sidebar = () => {
         </div>
 
         <div>
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              navigate("/app/users");
+            }}
+          >
             <PersonAddAlt></PersonAddAlt>
           </IconButton>
 
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              navigate("/app/groups");
+            }}
+          >
             <Groups></Groups>
           </IconButton>
 
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              navigate("/app/createGroups");
+            }}
+          >
             <AddCircle></AddCircle>
           </IconButton>
 
@@ -71,11 +87,13 @@ const Sidebar = () => {
 
       {/* Sidebar Search */}
 
-      <div className="bg-white rounded-3xl px-3 py-3 mx-3 flex items-center"
-          style={{
-            boxShadow:
-              "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
-          }}>
+      <div
+        className="bg-white rounded-3xl px-3 py-3 mx-3 flex items-center"
+        style={{
+          boxShadow:
+            "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
+        }}
+      >
         <IconButton>
           <Search></Search>
         </IconButton>
@@ -88,16 +106,19 @@ const Sidebar = () => {
       </div>
       {/* Sidebar Conversation */}
 
-      <div className="bg-white rounded-3xl px-3 py-3 m-3 flex-1"
-          style={{
-            boxShadow:
-              "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
-          }}>
+      <div
+        className="bg-white rounded-3xl px-3 py-3 m-3 flex-1"
+        style={{
+          boxShadow:
+            "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
+        }}
+      >
         {conversations.map((conversation) => {
           return (
             <ConversationItem
               key={conversation._id}
               conversation={conversation}
+          
             ></ConversationItem>
           );
         })}
