@@ -2,7 +2,7 @@ import { IconButton } from "@mui/material";
 import logo from "../assets/woutBg.png";
 import { Search } from "@mui/icons-material";
 
-const Users_groups = () => {
+const Users = () => {
   return (
     // Main container
     <div
@@ -96,4 +96,4 @@ const Users_groups = () => {
   );
 };
 
-export default Users_groups;
+export default Users;

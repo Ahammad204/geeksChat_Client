@@ -33,7 +33,7 @@ const Login = () => {
         <p className="text-xl">Login to your account</p>
         <TextField id="standard-basic" label="Enter User Name" variant="outlined" />
         <TextField id="outlined-password-input" label="Password" type="Password" autoComplete="current-password"></TextField>
-        <Button variant="outlined">Login</Button>
+        <Button  variant="outlined">Login</Button>
       </div>
     </div>
   );

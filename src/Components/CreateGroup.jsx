@@ -7,6 +7,8 @@ const CreateGroup = () => {
       className="flex self-center py-4 px-4 m-3 bg-white rounded-3xl justify-between"
       style={{
         flex: "0.7",
+        boxShadow:
+        "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
       }}
     >
       <input

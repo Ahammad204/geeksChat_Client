@@ -5,12 +5,32 @@ import { Delete, Send } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import MessageSelf from "./MessageSelf";
 import ChatOthers from "./ChatOthers";
+import { useState } from "react";
 
 
 
-const ChatArea = ({ conversation }) => {
-  const { name, timeStamp } = conversation;
+const ChatArea = () => {
 
+  const [conversations, setConversation] = useState([
+    {
+      _id: 1,
+      name: "Test01",
+      lastMassage: "Last01",
+      timeStamp: "Today",
+    },
+    {
+      _id: 2,
+      name: "Test02",
+      lastMassage: "Last02",
+      timeStamp: "Today",
+    },
+    {
+      _id: 3,
+      name: "Ahammad",
+      lastMassage: "Last03",
+      timeStamp: "Today",
+    },
+  ]);
 
   return (
     <div className="flex-[0.7] flex flex-col">
@@ -28,7 +48,7 @@ const ChatArea = ({ conversation }) => {
             alignSelf: "center",
           }}
         >
-          {name[0]}
+          {conversations[0].name[0]}
         </p>
         <div className="flex flex-col justify-center flex-1">
           <p
@@ -38,7 +58,7 @@ const ChatArea = ({ conversation }) => {
               color: "rgba(0,0,0,0.54)",
             }}
           >
-            {name}
+            {conversations[0].name}
           </p>
           <p
             style={{
@@ -47,7 +67,7 @@ const ChatArea = ({ conversation }) => {
               color: "rgba(0,0,0,0.54)",
             }}
           >
-            {timeStamp}
+            {conversations[0].timeStamp}
           </p>
         </div>
         <IconButton>
