@@ -14,9 +14,7 @@ export default {
       boxShadow: {
         custom: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
       },
-      backgroundColor:{
-        dark:"#2d3941"
-      }
+    
     },
   },
   plugins: [],

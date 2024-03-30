@@ -3,6 +3,7 @@ import {
   AccountCircle,
   AddCircle,
   Groups,
+  LightMode,
   Nightlight,
   PersonAddAlt,
   Search,
@@ -11,6 +12,8 @@ import { IconButton } from "@mui/material";
 import ConversationItem from "./ConversationItem";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTheme } from "../Features/ThemeSlice";
 
 const Sidebar = () => {
   const [conversations, setConversation] = useState([
@@ -36,13 +39,17 @@ const Sidebar = () => {
   // console.log(conversations)
 
   const navigate = useNavigate();
+  const disPatch = useDispatch();
+  const lightTheme = useSelector((state) => state.themeKey);
 
   return (
     <div className="flex-[0.3] flex flex-col">
       {/* Sidebar Header */}
 
       <div
-        className="bg-white rounded-3xl px-1 py-3 m-3 flex justify-between"
+        className={` rounded-3xl px-1 py-3 m-3 flex justify-between ${
+          !lightTheme ? "bg-slate-700" : "bg-white"
+        }`}
         style={{
           boxShadow:
             "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
@@ -50,7 +57,13 @@ const Sidebar = () => {
       >
         <div>
           <IconButton>
-            <AccountCircle></AccountCircle>
+            <AccountCircle
+              className={`${!lightTheme ? "bg-slate-700 text-white" : ""}`}
+              style={{
+                width: "1.25em",
+                height: "1.25em",
+              }}
+            ></AccountCircle>
           </IconButton>
         </div>
 
@@ -60,7 +73,13 @@ const Sidebar = () => {
               navigate("/app/users");
             }}
           >
-            <PersonAddAlt></PersonAddAlt>
+            <PersonAddAlt
+              className={`${!lightTheme ? "bg-slate-700 text-white" : ""}`}
+              style={{
+                width: "1.25em",
+                height: "1.25em",
+              }}
+            ></PersonAddAlt>
           </IconButton>
 
           <IconButton
@@ -68,7 +87,13 @@ const Sidebar = () => {
               navigate("/app/groups");
             }}
           >
-            <Groups></Groups>
+            <Groups
+              className={`${!lightTheme ? "bg-slate-700 text-white" : ""}`}
+              style={{
+                width: "1.25em",
+                height: "1.25em",
+              }}
+            ></Groups>
           </IconButton>
 
           <IconButton
@@ -76,11 +101,33 @@ const Sidebar = () => {
               navigate("/app/createGroups");
             }}
           >
-            <AddCircle></AddCircle>
+            <AddCircle
+              className={`${!lightTheme ? "bg-slate-700 text-white" : ""}`}
+              style={{
+                width: "1.25em",
+                height: "1.25em",
+              }}
+            ></AddCircle>
           </IconButton>
 
-          <IconButton>
-            <Nightlight></Nightlight>
+          <IconButton onClick={() => disPatch(toggleTheme())}>
+            {lightTheme && (
+              <Nightlight
+                style={{
+                  width: "1.25em",
+                  height: "1.25em",
+                }}
+              ></Nightlight>
+            )}
+            {!lightTheme && (
+              <LightMode
+                className={`${!lightTheme ? "bg-slate-700 text-white" : ""}`}
+                style={{
+                  width: "1.25em",
+                  height: "1.25em",
+                }}
+              ></LightMode>
+            )}
           </IconButton>
         </div>
       </div>
@@ -88,26 +135,34 @@ const Sidebar = () => {
       {/* Sidebar Search */}
 
       <div
-        className="bg-white rounded-3xl px-3 py-3 mx-3 flex items-center"
+        className={` rounded-3xl px-3 py-3 mx-3 flex items-center ${
+          lightTheme ? "bg-white" : "bg-slate-700 text-white"
+        }`}
         style={{
           boxShadow:
             "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
         }}
       >
         <IconButton>
-          <Search></Search>
+          <Search
+            className={`${!lightTheme ? "bg-slate-700 text-white" : ""}`}
+          ></Search>
         </IconButton>
 
         <input
           type="text"
           placeholder="Search"
-          className="outline-0 border-none text-xl ml-3 w-full"
+          className={`outline-0 border-none text-xl ml-3 w-full ${
+            lightTheme ? "" : "bg-slate-700 text-white"
+          }`}
         />
       </div>
       {/* Sidebar Conversation */}
 
       <div
-        className="bg-white rounded-3xl px-3 py-3 m-3 flex-1"
+        className={` rounded-3xl px-3 py-3 m-3 flex-1 ${
+          lightTheme ? "bg-white" : "bg-slate-700 text-white"
+        }`}
         style={{
           boxShadow:
             "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
@@ -118,7 +173,6 @@ const Sidebar = () => {
             <ConversationItem
               key={conversation._id}
               conversation={conversation}
-          
             ></ConversationItem>
           );
         })}
