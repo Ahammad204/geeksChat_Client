@@ -10,7 +10,7 @@ const MainContainer = () => {
 
   return (
     <div
-      className={` h-[90vh] w-[90vw] flex rounded-3xl ${
+      className={` h-[90vh] w-[90vw] main-container flex rounded-3xl ${
         lightTheme ? "bg-[#f4f5f8]" : "bg-slate-700 text-white"
       }`}
     >

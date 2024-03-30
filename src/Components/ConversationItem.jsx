@@ -1,14 +1,20 @@
 /* eslint-disable react/prop-types */
 
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const ConversationItem = ({ conversation }) => {
-  const { _id,name, lastMassage, timeStamp } = conversation;
+  const { _id, name, lastMassage, timeStamp } = conversation;
   //   console.log(conversation);
   const navigate = useNavigate();
+  const lightTheme = useSelector((state) => state.themeKey);
   return (
     <div
-      className="grid gap-x-3 m-1 p-3 rounded-xl box-border hover:bg-[#d9d9d9] active:bg-white"
+      className={`grid gap-x-3 m-1 p-3 rounded-xl box-border  ${
+        lightTheme
+          ? " hover:bg-[#d9d9d9] active:bg-white"
+          : "hover:bg-slate-500 active:bg-slate-700 text-white"
+      }`}
       style={{
         gridTemplateColumns: "32px auto auto",
         gridTemplateRows: "auto auto",
@@ -18,7 +24,9 @@ const ConversationItem = ({ conversation }) => {
       }}
     >
       <p
-        className="flex justify-center items-center bg-[#d9d9d9] text-3xl font-extrabold text-white h-10 w-10 p-2  justify-self-center"
+        className={`flex justify-center items-center bg-[#d9d9d9] text-3xl text-white font-extrabold  h-10 w-10 p-2  justify-self-center ${
+          lightTheme ? "bg-[#d9d9d9] " : "bg-slate-700 text-white"
+        }`}
         style={{
           gridArea: "1/1/3/2",
           borderRadius: "50%",
@@ -28,10 +36,10 @@ const ConversationItem = ({ conversation }) => {
         {name[0]}
       </p>
       <p
+        className={`${lightTheme ? "text-slate-500" : " text-white"}`}
         style={{
           gridArea: "1/2/2/4",
           fontWeight: "bold",
-          color: "rgba(0,0,0,0.54)",
         }}
       >
         {name}
@@ -41,7 +49,7 @@ const ConversationItem = ({ conversation }) => {
         style={{
           justifySelf: "flex-end",
           fontSize: "0.75rem",
-          color: "rgba(0,0,0,0.54)",
+        
         }}
       >
         {timeStamp}

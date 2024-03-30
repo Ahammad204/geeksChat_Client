@@ -14,6 +14,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../Features/ThemeSlice";
+import '../Styles/CustomStyle.css'
 
 const Sidebar = () => {
   const [conversations, setConversation] = useState([
@@ -43,13 +44,13 @@ const Sidebar = () => {
   const lightTheme = useSelector((state) => state.themeKey);
 
   return (
-    <div className="flex-[0.3] flex flex-col">
+    <div className="flex-[0.3] flex flex-col sidebar-container">
       {/* Sidebar Header */}
 
       <div
-        className={` rounded-3xl px-1 py-3 m-3 flex justify-between ${
+        className={` rounded-3xl px-1 py-3 m-3 sb-header flex md:justify-between ${
           !lightTheme ? "bg-slate-700" : "bg-white"
-        }`}
+        } `}
         style={{
           boxShadow:
             "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
@@ -135,7 +136,7 @@ const Sidebar = () => {
       {/* Sidebar Search */}
 
       <div
-        className={` rounded-3xl px-3 py-3 mx-3 flex items-center ${
+        className={` rounded-3xl px-3 py-3 mx-3 hidden md:flex items-center ${
           lightTheme ? "bg-white" : "bg-slate-700 text-white"
         }`}
         style={{
@@ -160,7 +161,7 @@ const Sidebar = () => {
       {/* Sidebar Conversation */}
 
       <div
-        className={` rounded-3xl px-3 py-3 m-3 flex-1 ${
+        className={` rounded-3xl px-3 py-3 m-3 hidden md:flex flex-col flex-1 ${
           lightTheme ? "bg-white" : "bg-slate-700 text-white"
         }`}
         style={{

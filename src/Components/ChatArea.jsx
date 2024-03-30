@@ -32,7 +32,7 @@ const ChatArea = () => {
 
   const lightTheme = useSelector((state) => state.themeKey);
   return (
-    <div className="flex-[0.7] flex flex-col">
+    <div className="flex-[0.7] flex flex-col chatArea-container">
       {/* Chat area Header */}
       <div
         className={`flex items-center gap-3  p-3 m-3 rounded-3xl ${
