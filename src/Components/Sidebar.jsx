@@ -14,7 +14,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../Features/ThemeSlice";
-import '../Styles/CustomStyle.css'
+import "../Styles/CustomStyle.css";
 
 const Sidebar = () => {
   const [conversations, setConversation] = useState([
@@ -57,7 +57,11 @@ const Sidebar = () => {
         }}
       >
         <div>
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              navigate("/app");
+            }}
+          >
             <AccountCircle
               className={`${!lightTheme ? "bg-slate-700 text-white" : ""}`}
               style={{
