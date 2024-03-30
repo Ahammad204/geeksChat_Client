@@ -6,11 +6,9 @@ import { IconButton } from "@mui/material";
 import MessageSelf from "./MessageSelf";
 import ChatOthers from "./ChatOthers";
 import { useState } from "react";
-
-
+import { useSelector } from "react-redux";
 
 const ChatArea = () => {
-
   const [conversations, setConversation] = useState([
     {
       _id: 1,
@@ -32,16 +30,23 @@ const ChatArea = () => {
     },
   ]);
 
+  const lightTheme = useSelector((state) => state.themeKey);
   return (
     <div className="flex-[0.7] flex flex-col">
       {/* Chat area Header */}
-      <div className="flex items-center gap-3 bg-white p-3 m-3 rounded-3xl"
-          style={{
-            boxShadow:
-              "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
-          }}>
+      <div
+        className={`flex items-center gap-3  p-3 m-3 rounded-3xl ${
+          lightTheme ? "bg-white" : "bg-slate-700 text-white"
+        }`}
+        style={{
+          boxShadow:
+            "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
+        }}
+      >
         <p
-          className="flex justify-center items-center bg-[#d9d9d9] text-3xl font-extrabold text-white h-10 w-10 p-2  justify-self-center"
+          className={`flex justify-center items-center  text-3xl font-extrabold text-white h-10 w-10 p-2  justify-self-center ${
+            lightTheme ? "bg-[#d9d9d9]" : "bg-slate-700 text-white"
+          }`}
           style={{
             gridArea: "1/1/3/2",
             borderRadius: "50%",
@@ -50,12 +55,15 @@ const ChatArea = () => {
         >
           {conversations[0].name[0]}
         </p>
-        <div className="flex flex-col justify-center flex-1">
+        <div
+          className={`flex flex-col justify-center flex-1 ${
+            lightTheme ? "text-slate-700" : " text-white"
+          }`}
+        >
           <p
             style={{
               gridArea: "1/2/2/4",
               fontWeight: "bold",
-              color: "rgba(0,0,0,0.54)",
             }}
           >
             {conversations[0].name}
@@ -64,48 +72,56 @@ const ChatArea = () => {
             style={{
               justifySelf: "flex-end",
               fontSize: "0.75rem",
-              color: "rgba(0,0,0,0.54)",
             }}
           >
             {conversations[0].timeStamp}
           </p>
         </div>
         <IconButton>
-          <Delete></Delete>
+          <Delete className={`${lightTheme ? "" : " text-white"}`}></Delete>
         </IconButton>
       </div>
 
       {/* Chat area  */}
       <div
-        className="flex-1 bg-white p-3 mx-3 rounded-3xl overflow-scroll"
+        className={`flex-1  p-3 mx-3 rounded-3xl overflow-scroll ${
+          lightTheme ? "bg-white" : "bg-slate-700 text-white"
+        }`}
         style={{
           scrollbarWidth: "none",
           /* WebKit */
           "::-webkit-scrollbar": {
             display: "none",
-           
           },
           boxShadow:
-          "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
+            "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
         }}
       >
-       <ChatOthers></ChatOthers>
+        <ChatOthers></ChatOthers>
         <MessageSelf></MessageSelf>
       </div>
 
       {/* Chat area Text input */}
-      <div className="bg-white p-3 m-3 rounded-3xl flex justify-between"
-          style={{
-            boxShadow:
-              "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
-          }}>
+      <div
+        className={` p-3 m-3 rounded-3xl flex justify-between ${
+          lightTheme ? "bg-white" : "bg-slate-700 text-white"
+        }`}
+        style={{
+          boxShadow:
+            "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
+        }}
+      >
         <input
           type="text"
           placeholder="Type a message"
-          className="outline-0 border-none text-xl ml-3 w-full"
+          className={`outline-0 border-none text-xl ml-3 w-full ${
+            lightTheme ? "" : "bg-slate-700 text-white"
+          }`}
         />
         <IconButton>
-          <Send></Send>
+          <Send
+            className={`${lightTheme ? "text-slate-700" : " text-white"}`}
+          ></Send>
         </IconButton>
       </div>
     </div>
