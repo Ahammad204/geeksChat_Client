@@ -1,12 +1,13 @@
-/* eslint-disable no-unused-vars */
-import { useState } from "react";
+/* eslint-disable react-refresh/only-export-components */
+import { createContext, useState } from "react";
 import Sidebar from "./Sidebar";
 import { Outlet } from "react-router-dom";
-import ChatArea from "./ChatArea";
 import { useSelector } from "react-redux";
 
-const MainContainer = () => {
+export const myContext = createContext();
+function MainContainer() {
   const lightTheme = useSelector((state) => state.themeKey);
+  const [refresh, setRefresh] = useState(true);
 
   return (
     <div
@@ -14,14 +15,16 @@ const MainContainer = () => {
         lightTheme ? "bg-[#f4f5f8]" : "bg-slate-700 text-white"
       }`}
     >
-      <Sidebar></Sidebar>
-      <Outlet></Outlet>
+      <myContext.Provider value={{ refresh: refresh, setRefresh: setRefresh }}>
+        <Sidebar />
+        <Outlet />
+      </myContext.Provider>
       {/* <Welcome></Welcome> */}
       {/* <CreateGroup></CreateGroup> */}
 
       {/* <Users_groups></Users_groups> */}
     </div>
   );
-};
+}
 
 export default MainContainer;
