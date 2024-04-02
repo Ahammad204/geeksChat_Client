@@ -2,6 +2,7 @@
 import {
   AccountCircle,
   AddCircle,
+  ExitToApp,
   Groups,
   Home,
   LightMode,
@@ -11,33 +12,33 @@ import {
 } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import ConversationItem from "./ConversationItem";
-import { useState } from "react";
+// import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../Features/ThemeSlice";
 import "../Styles/CustomStyle.css";
 
 const Sidebar = () => {
-  const [conversations, setConversation] = useState([
-    {
-      _id: 1,
-      name: "Test01",
-      lastMassage: "Last01",
-      timeStamp: "Today",
-    },
-    {
-      _id: 2,
-      name: "Test02",
-      lastMassage: "Last02",
-      timeStamp: "Today",
-    },
-    {
-      _id: 3,
-      name: "Ahammad",
-      lastMassage: "Last03",
-      timeStamp: "Today",
-    },
-  ]);
+  // const [conversations, setConversation] = useState([
+  //   {
+  //     _id: 1,
+  //     name: "Test01",
+  //     lastMassage: "Last01",
+  //     timeStamp: "Today",
+  //   },
+  //   {
+  //     _id: 2,
+  //     name: "Test02",
+  //     lastMassage: "Last02",
+  //     timeStamp: "Today",
+  //   },
+  //   {
+  //     _id: 3,
+  //     name: "Ahammad",
+  //     lastMassage: "Last03",
+  //     timeStamp: "Today",
+  //   },
+  // ]);
   // console.log(conversations)
 
   const navigate = useNavigate();
@@ -135,6 +136,16 @@ const Sidebar = () => {
               ></LightMode>
             )}
           </IconButton>
+          <IconButton
+            onClick={() => {
+              localStorage.removeItem("userData");
+              navigate("/");
+            }}
+          >
+            <ExitToApp
+              className={`${!lightTheme ? "bg-slate-700 text-white" : ""}`}
+            />
+          </IconButton>
         </div>
       </div>
 
@@ -174,14 +185,14 @@ const Sidebar = () => {
             "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
         }}
       >
-        {conversations.map((conversation) => {
+        {/* {conversations.map((conversation) => {
           return (
             <ConversationItem
               key={conversation._id}
               conversation={conversation}
             ></ConversationItem>
           );
-        })}
+        })} */}
       </div>
     </div>
   );
