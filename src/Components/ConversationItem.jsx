@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const ConversationItem = ({ conversation }) => {
   const { _id, name, lastMassage, timeStamp } = conversation;
-  //   console.log(conversation);
+  console.log(conversation);
   const navigate = useNavigate();
   const lightTheme = useSelector((state) => state.themeKey);
   return (

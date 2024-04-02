@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import {
   AccountCircle,
@@ -17,34 +18,42 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../Features/ThemeSlice";
 import "../Styles/CustomStyle.css";
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { myContext } from "./MainContainer";
 
 const Sidebar = () => {
-  // const [conversations, setConversation] = useState([
-  //   {
-  //     _id: 1,
-  //     name: "Test01",
-  //     lastMassage: "Last01",
-  //     timeStamp: "Today",
-  //   },
-  //   {
-  //     _id: 2,
-  //     name: "Test02",
-  //     lastMassage: "Last02",
-  //     timeStamp: "Today",
-  //   },
-  //   {
-  //     _id: 3,
-  //     name: "Ahammad",
-  //     lastMassage: "Last03",
-  //     timeStamp: "Today",
-  //   },
-  // ]);
-  // console.log(conversations)
-
   const navigate = useNavigate();
-  const disPatch = useDispatch();
+  const dispatch = useDispatch();
   const lightTheme = useSelector((state) => state.themeKey);
+  // const refresh = useSelector((state) => state.refreshKey);
+  const { refresh, setRefresh } = useContext(myContext);
+  console.log("Context API : refresh : ", refresh);
+  const [conversations, setConversations] = useState([]);
+  // console.log("Conversations of Sidebar : ", conversations);
+  const userData = JSON.parse(localStorage.getItem("userData"));
+  // console.log("Data from LocalStorage : ", userData);
+  const nav = useNavigate();
+  if (!userData) {
+    console.log("User not Authenticated");
+    nav("/");
+  }
 
+  const user = userData.data;
+  useEffect(() => {
+    // console.log("Sidebar : ", user.token);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
+
+    axios.get("http://localhost:5000/chat/", config).then((response) => {
+      console.log("Data refresh in sidebar ", response.data);
+      setConversations(response.data);
+      // setRefresh(!refresh);
+    });
+  }, [refresh, user.token]);
   return (
     <div className="flex-[0.3] flex flex-col sidebar-container">
       {/* Sidebar Header */}
@@ -185,14 +194,81 @@ const Sidebar = () => {
             "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
         }}
       >
-        {/* {conversations.map((conversation) => {
-          return (
-            <ConversationItem
-              key={conversation._id}
-              conversation={conversation}
-            ></ConversationItem>
-          );
-        })} */}
+        {conversations.map((conversation, index) => {
+          if (conversation.users.length === 1) {
+            return <div key={index}></div>;
+          }
+          if (conversation.latestMessage === undefined) {
+            // console.log("No Latest Message with ", conversation.users[1]);
+            return (
+              <div
+                key={index}
+                onClick={() => {
+                  console.log("Refresh fired from sidebar");
+                  // dispatch(refreshSidebarFun());
+                  setRefresh(!refresh);
+                }}
+              >
+                <div
+                  key={index}
+                  className="conversation-container"
+                  onClick={() => {
+                    navigate(
+                      "/app/chat/" +
+                        conversation._id +
+                        "&" +
+                        conversation.users[1].name
+                    );
+                  }}
+                  // dispatch change to refresh so as to update chatArea
+                >
+                  <p className={"con-icon" + (lightTheme ? "" : " dark")}>
+                    {conversation.users[1].name[0]}
+                  </p>
+                  <p className={"con-title" + (lightTheme ? "" : " dark")}>
+                    {conversation.users[1].name}
+                  </p>
+
+                  <p className="con-lastMessage">
+                    No previous Messages, click here to start a new chat
+                  </p>
+                  {/* <p className={"con-timeStamp" + (lightTheme ? "" : " dark")}>
+                {conversation.timeStamp}
+              </p> */}
+                </div>
+              </div>
+            );
+          } else {
+            return (
+              <div
+                key={index}
+                className="conversation-container"
+                onClick={() => {
+                  navigate(
+                    "chat/" +
+                      conversation._id +
+                      "&" +
+                      conversation.users[1].name
+                  );
+                }}
+              >
+                <p className={"con-icon" + (lightTheme ? "" : " dark")}>
+                  {conversation.users[1].name[0]}
+                </p>
+                <p className={"con-title" + (lightTheme ? "" : " dark")}>
+                  {conversation.users[1].name}
+                </p>
+
+                <p className="con-lastMessage">
+                  {conversation.latestMessage.content}
+                </p>
+                {/* <p className={"con-timeStamp" + (lightTheme ? "" : " dark")}>
+                {conversation.timeStamp}
+              </p> */}
+              </div>
+            );
+          }
+        })}
       </div>
     </div>
   );

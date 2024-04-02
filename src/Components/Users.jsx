@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 import { IconButton } from "@mui/material";
 import logo from "../assets/woutBg.png";
@@ -136,7 +137,7 @@ const Users = () => {
                       },
                     };
                     axios.post(
-                      "http://localhost:8080/chat/",
+                      "http://localhost:5000/chat/",
                       {
                         userId: user._id,
                       },
