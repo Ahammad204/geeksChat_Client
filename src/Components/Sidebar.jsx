@@ -3,6 +3,7 @@ import {
   AccountCircle,
   AddCircle,
   Groups,
+  Home,
   LightMode,
   Nightlight,
   PersonAddAlt,
@@ -62,13 +63,13 @@ const Sidebar = () => {
               navigate("/app");
             }}
           >
-            <AccountCircle
+            <Home
               className={`${!lightTheme ? "bg-slate-700 text-white" : ""}`}
               style={{
                 width: "1.25em",
                 height: "1.25em",
               }}
-            ></AccountCircle>
+            ></Home>
           </IconButton>
         </div>
 
