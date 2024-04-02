@@ -15,6 +15,7 @@
     "@mui/icons-material": "^5.15.14",
     "@mui/material": "^5.15.14",
     "@reduxjs/toolkit": "^2.2.2",
+    "axios": "^1.6.8",
     "framer-motion": "^11.0.24",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",
@@ -22,6 +23,7 @@
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.0",
     "react-router-dom": "^6.22.3",
+    "react-toastify": "^10.0.5",
     "sort-by": "^1.2.0"
   },
   "devDependencies": {
