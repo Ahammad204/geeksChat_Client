@@ -13,7 +13,6 @@ import {
 } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import ConversationItem from "./ConversationItem";
-// import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../Features/ThemeSlice";
@@ -26,14 +25,11 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const lightTheme = useSelector((state) => state.themeKey);
-  // const refresh = useSelector((state) => state.refreshKey);
   const { refresh, setRefresh } = useContext(myContext);
-  console.log("Context API : refresh : ", refresh);
   const [conversations, setConversations] = useState([]);
-  // console.log("Conversations of Sidebar : ", conversations);
   const userData = JSON.parse(localStorage.getItem("userData"));
-  // console.log("Data from LocalStorage : ", userData);
   const nav = useNavigate();
+
   if (!userData) {
     console.log("User not Authenticated");
     nav("/");
@@ -41,7 +37,6 @@ const Sidebar = () => {
 
   const user = userData.data;
   useEffect(() => {
-    // console.log("Sidebar : ", user.token);
     const config = {
       headers: {
         Authorization: `Bearer ${user.token}`,
@@ -51,17 +46,16 @@ const Sidebar = () => {
     axios.get("http://localhost:5000/chat/", config).then((response) => {
       console.log("Data refresh in sidebar ", response.data);
       setConversations(response.data);
-      // setRefresh(!refresh);
     });
   }, [refresh, user.token]);
+
   return (
     <div className="flex-[0.3] flex flex-col sidebar-container">
       {/* Sidebar Header */}
-
       <div
-        className={` rounded-3xl px-1 py-3 m-3 sb-header flex md:justify-between ${
+        className={`rounded-3xl px-1 py-3 m-3 sb-header flex md:justify-between ${
           !lightTheme ? "bg-slate-700" : "bg-white"
-        } `}
+        }`}
         style={{
           boxShadow:
             "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
@@ -126,16 +120,15 @@ const Sidebar = () => {
             ></AddCircle>
           </IconButton>
 
-          <IconButton onClick={() => disPatch(toggleTheme())}>
-            {lightTheme && (
+          <IconButton onClick={() => dispatch(toggleTheme())}>
+            {lightTheme ? (
               <Nightlight
                 style={{
                   width: "1.25em",
                   height: "1.25em",
                 }}
               ></Nightlight>
-            )}
-            {!lightTheme && (
+            ) : (
               <LightMode
                 className={`${!lightTheme ? "bg-slate-700 text-white" : ""}`}
                 style={{
@@ -145,6 +138,7 @@ const Sidebar = () => {
               ></LightMode>
             )}
           </IconButton>
+
           <IconButton
             onClick={() => {
               localStorage.removeItem("userData");
@@ -159,9 +153,8 @@ const Sidebar = () => {
       </div>
 
       {/* Sidebar Search */}
-
       <div
-        className={` rounded-3xl px-3 py-3 mx-3 hidden md:flex items-center ${
+        className={`rounded-3xl px-3 py-3 mx-3 hidden md:flex items-center ${
           lightTheme ? "bg-white" : "bg-slate-700 text-white"
         }`}
         style={{
@@ -183,10 +176,10 @@ const Sidebar = () => {
           }`}
         />
       </div>
-      {/* Sidebar Conversation */}
 
+      {/* Sidebar Conversation */}
       <div
-        className={` rounded-3xl px-3 py-3 m-3 hidden md:flex flex-col flex-1 ${
+        className={`rounded-3xl px-3 py-3 m-3 hidden md:flex flex-col flex-1 ${
           lightTheme ? "bg-white" : "bg-slate-700 text-white"
         }`}
         style={{
@@ -199,13 +192,11 @@ const Sidebar = () => {
             return <div key={index}></div>;
           }
           if (conversation.latestMessage === undefined) {
-            // console.log("No Latest Message with ", conversation.users[1]);
             return (
               <div
                 key={index}
                 onClick={() => {
                   console.log("Refresh fired from sidebar");
-                  // dispatch(refreshSidebarFun());
                   setRefresh(!refresh);
                 }}
               >
@@ -220,7 +211,6 @@ const Sidebar = () => {
                         conversation.users[1].name
                     );
                   }}
-                  // dispatch change to refresh so as to update chatArea
                 >
                   <p className={"con-icon" + (lightTheme ? "" : " dark")}>
                     {conversation.users[1].name[0]}
@@ -232,9 +222,6 @@ const Sidebar = () => {
                   <p className="con-lastMessage">
                     No previous Messages, click here to start a new chat
                   </p>
-                  {/* <p className={"con-timeStamp" + (lightTheme ? "" : " dark")}>
-                {conversation.timeStamp}
-              </p> */}
                 </div>
               </div>
             );
@@ -245,7 +232,7 @@ const Sidebar = () => {
                 className="conversation-container"
                 onClick={() => {
                   navigate(
-                    "chat/" +
+                    "/app/chat/" +
                       conversation._id +
                       "&" +
                       conversation.users[1].name
@@ -262,9 +249,6 @@ const Sidebar = () => {
                 <p className="con-lastMessage">
                   {conversation.latestMessage.content}
                 </p>
-                {/* <p className={"con-timeStamp" + (lightTheme ? "" : " dark")}>
-                {conversation.timeStamp}
-              </p> */}
               </div>
             );
           }
