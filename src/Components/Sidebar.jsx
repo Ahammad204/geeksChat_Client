@@ -202,7 +202,7 @@ const Sidebar = () => {
               >
                 <div
                   key={index}
-                  className="conversation-container"
+                  className="conversation-container hover:bg-gray-400"
                   onClick={() => {
                     navigate(
                       "/app/chat/" +
@@ -215,11 +215,11 @@ const Sidebar = () => {
                   <p className={"con-icon" + (lightTheme ? "" : " dark")}>
                     {conversation.users[1].name[0]}
                   </p>
-                  <p className={"con-title" + (lightTheme ? "" : " dark")}>
+                  <p className={"con-title" + (lightTheme ? "" : "text-white")}>
                     {conversation.users[1].name}
                   </p>
 
-                  <p className="con-lastMessage">
+                  <p className={"con-lastMessage"+ (lightTheme ? "" : "text-white")}>
                     No previous Messages, click here to start a new chat
                   </p>
                 </div>
@@ -239,14 +239,14 @@ const Sidebar = () => {
                   );
                 }}
               >
-                <p className={"con-icon" + (lightTheme ? "" : " dark")}>
+                <p className={"con-icon" + (lightTheme ? "" : "text-white")}>
                   {conversation.users[1].name[0]}
                 </p>
-                <p className={"con-title" + (lightTheme ? "" : " dark")}>
+                <p className={"con-title" + (lightTheme ? "" : "text-white")}>
                   {conversation.users[1].name}
                 </p>
 
-                <p className="con-lastMessage">
+                <p className={`con-lastMessage `}>
                   {conversation.latestMessage.content}
                 </p>
               </div>
